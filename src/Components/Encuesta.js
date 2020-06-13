@@ -27,7 +27,7 @@ const config = {
 }
 firebase.initializeApp(config)
 
-function Encuesta({encuesta, user, dispatch}) {
+function Encuesta({encuesta, dispatch}) {
   const [value, setValue] = useState({name: 'pepe'})
 
   // useEffect(() => {

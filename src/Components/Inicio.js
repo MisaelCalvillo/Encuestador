@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,7 +12,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { connect } from 'react-redux'
 
+import * as firebase from 'firebase'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -34,11 +36,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Inicio() {
+function Inicio({dispatch}) {
   const classes = useStyles();
+  const [emailValue, setEmailValue] = useState('')
+  const [passwordValue, setPasswordValue] = useState('')
 
-  function goToPoll() {
-    this.props.history.push('/encuesta')
+  function handleEmailChange(e){
+    setEmailValue(e.target.value)
+  }
+  function handlePasswordChange(e){
+    setPasswordValue(e.target.value)
+  }
+
+  function validarUsuario (e) {
+    e.preventDefault()
+    dispatch({ type: 'SHOW_USER', email: emailValue, password: passwordValue})
+    firebase.auth().signInWithEmailAndPassword(emailValue, passwordValue)
+      .then(result => {
+        if(result.user.email){
+          console.log(result.user.email)
+
+        } else {
+          alert('no existes :c')
+          firebase.auth().signOut()
+        }
+      })
   }
 
   return (
@@ -51,9 +73,11 @@ function Inicio() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={validarUsuario}>
           <TextField
             variant="outlined"
+            value={emailValue}
+            onChange={handleEmailChange}
             margin="normal"
             required
             fullWidth
@@ -65,6 +89,8 @@ function Inicio() {
           />
           <TextField
             variant="outlined"
+            value={passwordValue}
+            onChange={handlePasswordChange}
             margin="normal"
             required
             fullWidth
@@ -84,7 +110,6 @@ function Inicio() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={goToPoll}
           >
             Sign In
           </Button>
@@ -106,4 +131,8 @@ function Inicio() {
   );
 }
 
-export default Inicio;
+const mapStateToProps = (state) => ({
+  user: state.user
+});
+
+export default connect(mapStateToProps)(Inicio)
