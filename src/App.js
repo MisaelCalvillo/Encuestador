@@ -1,6 +1,9 @@
 import React from 'react';
 import './App.css';
 import Encuesta from './Components/Encuesta';
+import Inicio from './Components/Inicio';
+import {Route, Switch} from "react-router-dom";
+
 
 
 const encuesta = [
@@ -37,7 +40,22 @@ const encuesta = [
 function App() {
   return (
     <div className="App">
-      <Encuesta encuesta={encuesta}/>
+      <Switch>
+        <Route
+          exact
+          path="/encuesta"
+          render={ routeProps => (
+            <Encuesta encuesta={encuesta}/>
+          )}
+        />
+        <Route
+          exact
+          path="/"
+          render={ routeProps => (
+            <Inicio {...routeProps}/>
+          )}
+        />
+      </Switch>
     </div>
   );
 }
