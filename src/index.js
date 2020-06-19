@@ -14,8 +14,7 @@ const encuesta = [
       a: "Bagdad",
       b: "Teherán",
       c: "Islamabad"
-    },
-    respuestaCorrecta: "b"
+    }
   },
   {
     pregunta: "2. Cuál es la capital de Irak?",
@@ -23,8 +22,7 @@ const encuesta = [
       a: "Kuwait",
       b: "Dubai",
       c: "Bagdad"
-    },
-    respuestaCorrecta: "c"
+    }
   },
   {
     pregunta: "3. Cuál es la capital de Noruega?",
@@ -33,8 +31,7 @@ const encuesta = [
       b: "Copenague",
       c: "Estocolmo",
       d: "Oslo"
-    },
-    respuestaCorrecta: "d"
+    }
   },
   {
     pregunta: "4. Cuál es la capital de Serbia?",
@@ -42,8 +39,7 @@ const encuesta = [
       a: "Belgrado",
       b: "Zagreb",
       c: "Kabul"
-    },
-    respuestaCorrecta: "a"
+    }
   },
   {
       pregunta: "5. Cuál es la capital de Australia?",
@@ -51,8 +47,7 @@ const encuesta = [
           a: "Sidney",
           b: "Zurich",
           c: "Canberra"
-    },
-    respuestaCorrecta: "c"
+    }
   },
   {
     pregunta: "6. Cuál es la capital de Canadá?",
@@ -60,8 +55,7 @@ const encuesta = [
       a: "Toronto",
       b: "Montreal",
       c: "Ontario"
-    },
-    respuestaCorrecta: "c"
+    }
   },
   {
     pregunta: "7. Cuál es la capital de Vietnam?",
@@ -69,8 +63,7 @@ const encuesta = [
       a: "Puket",
       b: "Ho Chin Ming",
       c: "Pan Lao Kung"
-    },
-    respuestaCorrecta: "b"
+    }
   },
   {
     pregunta: "8. Cuál es la capital de China?",
@@ -78,8 +71,7 @@ const encuesta = [
       a: "Shangai",
       b: "Pekín",
       c: "Seul"
-    },
-    respuestaCorrecta: "b"
+    }
   },
   {
     pregunta: "9. Cuál es la capital de Pakistan?",
@@ -87,8 +79,7 @@ const encuesta = [
       a: "Islamabad",
       b: "Kuwait",
       c: "Kabul"
-    },
-    respuestaCorrecta: "a"
+    }
   },
   {
     pregunta: "10. Cuál es la capital de Marruecos?",
@@ -96,8 +87,7 @@ const encuesta = [
       a: "Casablanca",
       b: "Rabat",
       c: "Kabul"
-    },
-    respuestaCorrecta: "b"
+    }
   }
 ];
 
