@@ -15,6 +15,18 @@ import { connect } from 'react-redux'
 
 import * as firebase from 'firebase'
 
+const config = {
+  apiKey: "AIzaSyDF3GpYdbtYA-Jkj27R7qLVe_RONDPkHOI",
+  authDomain: "encuestascalvillo.firebaseapp.com",
+  databaseURL: "https://encuestascalvillo.firebaseio.com",
+  projectId: "encuestascalvillo",
+  storageBucket: "encuestascalvillo.appspot.com", 
+  messagingSenderId: "89954048228",
+  appId: "1:89954048228:web:3d36bf23a92b9a1be5f4f1",
+  measurementId: "G-68MLML2SE6"
+}
+firebase.initializeApp(config)
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -131,7 +143,8 @@ function Inicio({dispatch, history}) {
 }
 
 const mapStateToProps = (state) => ({
-  user: state.user
+  user: state.user,
+  encuesta: state.encuesta
 });
 
 export default connect(mapStateToProps)(Inicio)
