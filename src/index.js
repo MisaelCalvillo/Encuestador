@@ -9,39 +9,97 @@ import uuid from 'react-uuid'
 
 const encuesta = [
   {
-    id: uuid(),
-    pregunta: 'Usted Conoce al candidato xxx?',
-    opciones: [
-      { opcion: 'si', selected: false },
-      { opcion: 'no', selected: false },
-      { opcion: 'quiza', selected: false },
-      { opcion: 'tal ves', selected: false }
-    ],
-    isActive: false
+    pregunta: "1. Cuál es la capital de Irán?",
+    respuestas: {
+      a: "Bagdad",
+      b: "Teherán",
+      c: "Islamabad"
+    },
+    respuestaCorrecta: "b"
   },
   {
-    id: uuid(),
-    pregunta: 'a quien elegirias?',
-    opciones: [
-      { opcion: 'tony stark', selected: false },
-      { opcion: 'Arya stark', selected: false },
-      { opcion: 'Hulk', selected: false },
-      { opcion: 'deadpool', selected: false }
-    ],
-    isActive: false
+    pregunta: "2. Cuál es la capital de Irak?",
+    respuestas: {
+      a: "Kuwait",
+      b: "Dubai",
+      c: "Bagdad"
+    },
+    respuestaCorrecta: "c"
   },
   {
-    id: uuid(),
-    pregunta: 'cuantas chelas te tomas?',
-    opciones: [
-      { opcion: 1 },
-      { opcion: '2 o 3' },
-      { opcion:' 4 o 6' },
-      { opcion: '7 o más' }
-    ],
-    isActive: false
+    pregunta: "3. Cuál es la capital de Noruega?",
+    respuestas: {
+      a: "Roma",
+      b: "Copenague",
+      c: "Estocolmo",
+      d: "Oslo"
+    },
+    respuestaCorrecta: "d"
+  },
+  {
+    pregunta: "4. Cuál es la capital de Serbia?",
+    respuestas: {
+      a: "Belgrado",
+      b: "Zagreb",
+      c: "Kabul"
+    },
+    respuestaCorrecta: "a"
+  },
+  {
+      pregunta: "5. Cuál es la capital de Australia?",
+      respuestas: {
+          a: "Sidney",
+          b: "Zurich",
+          c: "Canberra"
+    },
+    respuestaCorrecta: "c"
+  },
+  {
+    pregunta: "6. Cuál es la capital de Canadá?",
+    respuestas: {
+      a: "Toronto",
+      b: "Montreal",
+      c: "Ontario"
+    },
+    respuestaCorrecta: "c"
+  },
+  {
+    pregunta: "7. Cuál es la capital de Vietnam?",
+    respuestas: {
+      a: "Puket",
+      b: "Ho Chin Ming",
+      c: "Pan Lao Kung"
+    },
+    respuestaCorrecta: "b"
+  },
+  {
+    pregunta: "8. Cuál es la capital de China?",
+    respuestas: {
+      a: "Shangai",
+      b: "Pekín",
+      c: "Seul"
+    },
+    respuestaCorrecta: "b"
+  },
+  {
+    pregunta: "9. Cuál es la capital de Pakistan?",
+    respuestas: {
+      a: "Islamabad",
+      b: "Kuwait",
+      c: "Kabul"
+    },
+    respuestaCorrecta: "a"
+  },
+  {
+    pregunta: "10. Cuál es la capital de Marruecos?",
+    respuestas: {
+      a: "Casablanca",
+      b: "Rabat",
+      c: "Kabul"
+    },
+    respuestaCorrecta: "b"
   }
-]
+];
 
 const initialState = {
   user: {
