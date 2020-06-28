@@ -1,7 +1,6 @@
 import React from 'react'
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import { connect } from 'react-redux'

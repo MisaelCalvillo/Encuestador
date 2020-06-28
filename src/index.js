@@ -5,7 +5,6 @@ import App from './App';
 import { Provider } from 'react-redux'
 import {createStore} from 'redux'
 import { BrowserRouter } from 'react-router-dom';
-import uuid from 'react-uuid'
 
 const encuesta = [
   {
