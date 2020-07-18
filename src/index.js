@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { StylesProvider } from '@material-ui/core/styles';
 import './index.css';
 import App from './App';
 import { Provider } from 'react-redux'
@@ -122,7 +123,9 @@ const store = createStore(reducer)
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
-      <App />
+      <StylesProvider injectFirst>
+        <App/>
+      </StylesProvider>
     </Provider>
   </BrowserRouter>,
   document.getElementById('root')
