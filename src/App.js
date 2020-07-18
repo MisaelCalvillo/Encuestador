@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
 import Encuesta from './Components/Encuesta';
-import Inicio from './Components/Inicio';
 import ShowSurveys from './Components/ShowSurveys'
 import AddressConfirmation from './Components/AddressConfirmation'
 import Address from './Components/Address'
 import {Route, Switch} from "react-router-dom";
 
+import { Authentication } from './scenes';
 
 function App() {
   return (
@@ -40,12 +40,15 @@ function App() {
             <Encuesta {...routeProps}/>
           )}
         />
+        {/* <Route
+          exact
+          path="/surveys"
+          component={}
+        /> */}
         <Route
           exact
           path="/"
-          render={ routeProps => (
-            <Inicio {...routeProps}/>
-          )}
+          component={Authentication}
         />
       </Switch>
     </div>

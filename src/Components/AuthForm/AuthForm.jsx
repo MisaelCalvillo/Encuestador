@@ -13,6 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { connect } from 'react-redux'
 
+
 import * as firebase from 'firebase'
 
 const config = {
@@ -47,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Inicio({dispatch, history}) {
+function AuthForm({dispatch, history}) {
   const classes = useStyles();
   const [emailValue, setEmailValue] = useState('')
   const [passwordValue, setPasswordValue] = useState('')
@@ -63,14 +64,14 @@ function Inicio({dispatch, history}) {
     e.preventDefault()
     dispatch({ type: 'SHOW_USER', email: emailValue, password: passwordValue})
     firebase.auth().signInWithEmailAndPassword(emailValue, passwordValue)
-      .then(result => {
-        if(result.user.email){
-          console.log(result.user.email)
-          history.push(`/encuesta`)
-        } else {
-          alert('no existes :c')
-          firebase.auth().signOut()
-        }
+      .then(({ user }) => {
+          if (user) {
+            debugger
+            history.push(`/encuesta`)
+          } else {
+            debugger
+            firebase.auth().signOut()
+          }
       })
   }
 
@@ -139,12 +140,13 @@ function Inicio({dispatch, history}) {
         </form>
       </div>
     </Container>
-  );
+  )
 }
+
 
 const mapStateToProps = (state) => ({
   user: state.user,
   encuesta: state.encuesta
 });
 
-export default connect(mapStateToProps)(Inicio)
+export default connect(mapStateToProps)(AuthForm)

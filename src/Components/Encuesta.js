@@ -23,6 +23,7 @@ const styles = makeStyles({
 function Encuesta({encuesta}) {
   const classes = styles()
 
+  debugger
   function showTest(){
     const preguntasYrespuestas  = [];
     
