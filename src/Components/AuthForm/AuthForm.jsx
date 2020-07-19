@@ -7,12 +7,14 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+
 import { connect } from 'react-redux'
-
-
+import { useHistory } from 'react-router-dom';
 import * as firebase from 'firebase'
 import 'firebase/firestore';
 import { PuffLoader } from '../../Components';
+import { bindActionCreators } from 'redux';
+import { state as stateManager } from '../../services';
 
 const config = {
   apiKey: "AIzaSyDF3GpYdbtYA-Jkj27R7qLVe_RONDPkHOI",
@@ -45,11 +47,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function AuthForm({className, dispatch, history}) {
+function AuthForm({className, setUser}) {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
   const [emailValue, setEmailValue] = useState('')
   const [passwordValue, setPasswordValue] = useState('')
+
+  const history = useHistory();
 
   function handleEmailChange(e){
     setEmailValue(e.target.value)
@@ -61,17 +65,17 @@ function AuthForm({className, dispatch, history}) {
   function validarUsuario (e) {
     e.preventDefault()
     setLoading(true);
-    dispatch({ type: 'SHOW_USER', email: emailValue, password: passwordValue})
     firebase.auth().signInWithEmailAndPassword(emailValue, passwordValue)
       .then(({ user, ...other }) => {
           console.log('OTHER', other);
           if (user) {
-            console.log('Hay usuario', user);
             const ref = db.collection('users').doc(user.uid);
             ref.get().then(function(doc) {
               if (doc.exists) {
-                  console.log("Document data:", doc.data());
-                  dispatch()
+                  const user = doc.data();
+                  setUser(user);
+                  setLoading(false);
+                  history.push("/home");
               } else {
                   // doc.data() will be undefined in this case
                   console.log("No such document!");
@@ -164,4 +168,8 @@ const mapStateToProps = (state) => ({
   encuesta: state.encuesta
 });
 
-export default connect(mapStateToProps)(AuthForm)
+const mapDispatchToProps = (dispatch) => ({
+  setUser: bindActionCreators(stateManager.actions.setUser, dispatch)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthForm)

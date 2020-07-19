@@ -6,7 +6,7 @@ import AddressConfirmation from './Components/AddressConfirmation'
 import Address from './Components/Address'
 import {Route, Switch} from "react-router-dom";
 
-import { Authentication } from './scenes';
+import { Authentication, Home } from './scenes';
 
 function App() {
   return (
@@ -45,6 +45,11 @@ function App() {
           path="/surveys"
           component={}
         /> */}
+        <Route 
+          exact
+          path="/home"
+          component={Home}
+        />
         <Route
           exact
           path="/"
