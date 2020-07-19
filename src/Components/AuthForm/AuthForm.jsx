@@ -11,6 +11,7 @@ import { connect } from 'react-redux'
 
 
 import * as firebase from 'firebase'
+import 'firebase/firestore';
 import { PuffLoader } from '../../Components';
 
 const config = {
@@ -24,6 +25,8 @@ const config = {
   measurementId: "G-68MLML2SE6"
 }
 firebase.initializeApp(config)
+
+const db = firebase.firestore();
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -60,9 +63,22 @@ function AuthForm({className, dispatch, history}) {
     setLoading(true);
     dispatch({ type: 'SHOW_USER', email: emailValue, password: passwordValue})
     firebase.auth().signInWithEmailAndPassword(emailValue, passwordValue)
-      .then(({ user }) => {
+      .then(({ user, ...other }) => {
+          console.log('OTHER', other);
           if (user) {
             console.log('Hay usuario', user);
+            const ref = db.collection('users').doc(user.uid);
+            ref.get().then(function(doc) {
+              if (doc.exists) {
+                  console.log("Document data:", doc.data());
+                  dispatch()
+              } else {
+                  // doc.data() will be undefined in this case
+                  console.log("No such document!");
+              }
+          }).catch(function(error) {
+              console.log("Error getting document:", error);
+          });
           } else {
           }
           setLoading(false);

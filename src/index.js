@@ -1,11 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { createLogger } from 'redux-logger';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { Map as map, Iterable } from 'immutable';
+import { BrowserRouter } from 'react-router-dom';
 import { StylesProvider } from '@material-ui/core/styles';
 import './index.css';
+
+import { state } from './services';
 import App from './App';
-import { Provider } from 'react-redux'
-import {createStore} from 'redux'
-import { BrowserRouter } from 'react-router-dom';
 
 const encuesta = [
   {
@@ -91,34 +97,36 @@ const encuesta = [
   }
 ];
 
-const initialState = {
-  user: {
-    email: '',
-    password: ''
+const stateTransformer = statum => {
+  if (Iterable.isIterable(statum)) return statum.toJS();
+  return statum;
+};
+
+const logger = createLogger({
+  stateTransformer,
+  collapsed: () => true,
+  colors: {
+    title: () => '#ffa500',
+    prevState: () => '#999999',
+    action: () => '#4CDD50',
+    nextState: () => '#0FAFF4',
+    error: () => '#FF0000'
   },
-  respuestas: {
+  diff: true
+});
 
-  },
-  encuesta: encuesta
+let store;
+
+window.on_development = process.env.NODE_ENV !== 'production';
+if (window.on_development) {
+  store = createStore(
+    state.reducers,
+    map(),
+    composeWithDevTools(applyMiddleware(thunk, logger))
+  );
+} else {
+  store = createStore(state.reducers.root, map(), composeWithDevTools(applyMiddleware(thunk)));
 }
-
-function reducer(state = initialState, action) {
-  switch(action.type){
-    case 'SHOW_USER':
-      return {
-        user : {
-          email: action.email,
-          password: action.password
-        }
-      }
-    default:
-      return state;
-  }
-}
-
-const store = createStore(reducer)
-
-// store.dispatch({type: 'SHOW_USER'})
 
 ReactDOM.render(
   <BrowserRouter>
